@@ -1,9 +1,6 @@
 from classes import *
 from CONSTANTS import WIDTH, HEIGHT
 
-import os
-import sys
-
 player = None
 level_x, level_y = None, None
 preview = False
@@ -28,10 +25,6 @@ def generate_level(level):
 
 def load_level(filename):
     filename = "data/" + filename
-
-    if not os.path.isfile(filename):
-        print(f"Файл с изображением '{filename}' не найден")
-        sys.exit()
 
     with open(filename, 'r') as mapFile:
         level_map = [line.strip() for line in mapFile]
@@ -78,14 +71,12 @@ def start_screen():
 
 
 if __name__ == '__main__':
-    map_name = input()
-
     pygame.init()
     size = WIDTH, HEIGHT
     screen = pygame.display.set_mode(size)
     clock = pygame.time.Clock()
 
-    player, level_x, level_y = generate_level(load_level(map_name))
+    player, level_x, level_y = generate_level(load_level('map_1.txt'))
     running = True
     while running:
         for event in pygame.event.get():
